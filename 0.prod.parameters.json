@@ -1,0 +1,63 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "pTags": {
+            "value": {
+              "createdby": "Rupesh",
+              "category": "bicep"
+            }
+        },
+        "pcontainerAppEnvName": {
+            "value": "acaenv-enkelconnect-prod-01"
+        },
+        "pStorageAccountName": {
+            "value": "stenkelconnectprod01"
+        },
+        "psqldatabaseName": {
+            "value": "sqldb-enkelconnect-prod-01"
+        },
+        "psqlServerName": {
+            "value": "sqlsvrenkelconnectprod01"
+        },
+        "psqldatabasemaxsize": {
+            "value": 2147483648
+        },
+        "pDatabaseSkuName": {
+            "value": "Basic"
+        },
+        "pDatabaseSkuTier": {
+            "value": "Basic"
+        },
+        "pDatabaseCollation": {
+            "value": "SQL_Latin1_General_CP1_CI_AS"
+        },
+        "prequestedBackupStorageRedundancy": {
+            "value": "Local"
+        },
+        "administratorLogin":{
+            "value": "AdminUser"
+        },
+        "pStorageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "pacrName":{
+            "value": "acrenkelconnectprod01"
+        },
+        "pkeyVaultName": {
+            "value": "kv-enkelconnect-prod-01"
+        },
+        "prgLock": {
+            "value": "rglock"
+        },
+        "pcontainerAppLogAnalyticsName": {
+            "value": "logenkelconnectprod01"
+        },
+        "pcontainerAppbackendName":{
+            "value": "acaenkelconnectprod02"
+        },
+        "pcontainerAppFrontendName":{
+            "value": "acaenkelconnectprod01"
+        }
+    }
+}
