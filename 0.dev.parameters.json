@@ -44,9 +44,6 @@
         "pacrName":{
             "value": "acrruppuconnectdev01"
         },
-        "pkeyVaultName": {
-            "value": "kv-ruppuconnect-dev-01"
-        },
         "prgLock": {
             "value": "rglock"
         },

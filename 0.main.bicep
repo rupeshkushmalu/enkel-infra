@@ -63,14 +63,8 @@ param pStorageAccountName string
 @description('The name of the ACR')
 param pacrName string
 
-@description('The name of the Key Vault')
-param pkeyVaultName string
-
 @description('The name of the Resource Group Lock')
 param prgLock string
-
-@description('The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Get it by using Get-AzADUser or Get-AzADServicePrincipal cmdlets.')
-param pobjectId string
 
 module acr '1.Acr.bicep' = {
   name: 'acr'
@@ -113,16 +107,6 @@ module StorageAccount '3.StorageAccount.bicep' = {
     pStorageAccountName: pStorageAccountName
     pStorageAccountType: pStorageAccountType
     pTags: pTags
-  }
-}
-
-module KeyVault '5.KeyVault.bicep' = {
-  name: 'KeyVault'
-  params: {
-    keyVaultName: pkeyVaultName
-    objectId: pobjectId
-    pTags: pTags
-    plocation: plocation
   }
 }
 
