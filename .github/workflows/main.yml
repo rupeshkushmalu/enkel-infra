@@ -1,0 +1,51 @@
+name: enkelConnect-Infra
+on:
+  workflow_dispatch:
+
+jobs:
+  what-if:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+    - uses: actions/checkout@v3
+
+      # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # What-If step
+    - name: Run What-If
+      run: |
+        az deployment group what-if --resource-group EnkelConnect-RG-Dev --template-file ./0.main.bicep --parameters @./0.dev.parameters.json pSqlServerPassword=${{ secrets.pSqlServerPassword }} pobjectId=${{ secrets.pobjectId }}
+
+  approval:
+    needs: what-if
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approval Required
+        run: echo "Waiting for approval to proceed with deployment..."
+    environment:
+      name: dev
+
+  deploy:
+    needs: approval
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+    - uses: actions/checkout@v3
+
+      # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Deploy Bicep file
+    - name: Deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.ENKELCONNECT_RG_DEV }}
+        template: ./0.main.bicep
+        parameters: './0.dev.parameters.json pSqlServerPassword=${{ secrets.pSqlServerPassword }}'
+        failOnStdErr: false
