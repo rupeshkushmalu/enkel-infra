@@ -17,7 +17,7 @@ jobs:
       # What-If step
     - name: Run What-If
       run: |
-        az deployment group what-if --resource-group ${{ secrets.ENKELCONNECT_RG_DEV }} --template-file ./0.main.bicep --parameters @./0.dev.parameters.json pSqlServerPassword=${{ secrets.pSqlServerPassword }}
+        az deployment group what-if --resource-group ${{ secrets.ENKELCONNECT_RG_DEV }} --template-file ./0.main.bicep --parameters @./0.dev.parameters.json pSqlServerPassword=${{ secrets.pSqlServerPassword }} pobjectId=${{ secrets.pobjectId }}
 
   approval:
     needs: what-if
