@@ -20,6 +20,8 @@ param psqldatabasemaxsize int
 @description('Name of the SQL Database')
 param psqldatabaseName string 
 
+param pobjectId string
+
 @allowed([
   'Local'
   'Geo'
@@ -148,7 +150,7 @@ module sqldb '8.sqldb.bicep' = {
     psqlServerName: psqlServerName
     psqldatabaseName: psqldatabaseName
     psqldatabasemaxsize: psqldatabasemaxsize
-    ptags: {}
+    ptags: pTags
     plocation: 'Central India'
   }
   dependsOn: [
@@ -189,4 +191,14 @@ module containerAppBackend '10.containerApp.bicep' = {
   dependsOn: [
     aca
   ]
+}
+
+module keyVault '5.keyvault.bicep' = {
+  name: 'keyVault'
+  params: {
+    keyVaultName: 'keyruppu009'
+    objectId: pobjectId
+    pTags: pTags
+    plocation: plocation
+  }
 }
