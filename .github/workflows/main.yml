@@ -17,7 +17,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
       # bicep linter
 
-    - uses: azure/CLI@v1
+    - uses: azure/CLI@v2
       with:
         inlineScript: |
           az bicep install
