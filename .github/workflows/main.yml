@@ -3,6 +3,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  bicep-linter:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+    - uses: actions/checkout@v3
+      with:
+        getch-depth: "0"
+
+      # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # bicep linter
+
+    - uses: azure/CLI@v1
+      with:
+        inineScript: |
+          az bcep install
+          az bicep lint --file ./0.main.bicep
+
   what-if:
     runs-on: ubuntu-latest
     steps:
