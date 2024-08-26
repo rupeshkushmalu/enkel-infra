@@ -4,7 +4,7 @@ on:
 
 jobs:
   bicep-linter:
-    runs-on: azure-linux
+    runs-on: ubuntu-latest
     steps:
       # Checkout code
     - uses: actions/checkout@v3
@@ -15,12 +15,15 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
       # bicep linter
 
-    - uses: azure/CLI@v2
-      with:
-        inlineScript: |
-          az bicep install
-          az bicep upgrade
-          az bicep lint --file ./0.main.bicep
+    - name: Install Bicep CLI
+      run: |
+        curl -Lo bicep https://github.com/Azure/bicep/releases/download/v0.14.40/bicep-linux-x64
+        chmod +x ./bicep
+        sudo mv ./bicep /usr/local/bin/bicep
+
+    - name: Lint Bicep file
+      run: |
+        bicep lint ./0.main.bicep
 
   what-if:
     needs: bicep-linter
