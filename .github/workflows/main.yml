@@ -20,7 +20,7 @@ jobs:
     - uses: azure/CLI@v1
       with:
         inlineScript: |
-          az bcep install
+          az bicep install
           az bicep lint --file ./0.main.bicep
 
   what-if:
