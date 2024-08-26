@@ -21,6 +21,7 @@ jobs:
       with:
         inlineScript: |
           az bicep install
+          az bicep upgrade
           az bicep lint --file ./0.main.bicep
 
   what-if:
