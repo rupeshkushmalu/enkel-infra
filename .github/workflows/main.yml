@@ -19,11 +19,12 @@ jobs:
 
     - uses: azure/CLI@v1
       with:
-        inineScript: |
+        inlineScript: |
           az bcep install
           az bicep lint --file ./0.main.bicep
 
   what-if:
+    needs: bicep-linter
     runs-on: ubuntu-latest
     steps:
       # Checkout code
